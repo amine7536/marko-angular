@@ -1,0 +1,12 @@
+{
+  "name": "angular-ui-router",
+  "version": "0.2.15",
+  "homepage": "https://github.com/angular-ui/ui-router",
+  "registry": "bower",
+  "main": "./release/angular-ui-router.js",
+  "devDependencies": {},
+  "format": "global",
+  "dependencies": {
+    "angular": "angular@*"
+  }
+}

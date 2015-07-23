@@ -1,0 +1,14 @@
+<div ui-layout>
+
+    <div ui-layout-container>
+        <div ui-layout="{flow : 'column'}">
+            <div ui-layout-container>
+                <div id="editor" ui-codemirror="{ onLoad : vm.codemirrorLoaded }" ui-codemirror-opts="editorOptions" ng-model="editor"></div>
+            </div>
+            <div id="out" ui-layout-container>
+                <div markdown="editor" class="preview markdown-body"></div>
+            </div>
+        </div>
+    </div>
+
+</div>

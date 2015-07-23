@@ -1,0 +1,1 @@
+module.exports = require("bower:angular-ui-codemirror@0.3.0/ui-codemirror");

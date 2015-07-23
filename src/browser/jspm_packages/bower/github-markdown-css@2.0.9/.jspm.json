@@ -1,0 +1,22 @@
+{
+  "name": "github-markdown-css",
+  "description": "The minimal amount of CSS to replicate the GitHub Markdown style",
+  "version": "2.0.9",
+  "keywords": [
+    "github",
+    "markdown",
+    "md",
+    "css",
+    "style",
+    "stylesheet"
+  ],
+  "homepage": "https://github.com/sindresorhus/github-markdown-css",
+  "registry": "bower",
+  "license": "MIT",
+  "main": "github-markdown.css!css",
+  "devDependencies": {},
+  "format": "global",
+  "dependencies": {
+    "css": "jspm:css@*"
+  }
+}

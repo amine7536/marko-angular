@@ -1,0 +1,1 @@
+module.exports = require("bower:codemirror@5.5.0/lib/codemirror");

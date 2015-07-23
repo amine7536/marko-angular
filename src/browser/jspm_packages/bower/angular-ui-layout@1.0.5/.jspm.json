@@ -1,0 +1,14 @@
+{
+  "name": "angular-ui-layout",
+  "version": "1.0.5",
+  "homepage": "https://github.com/angular-ui/ui-layout",
+  "registry": "bower",
+  "main": "ui-layout.js",
+  "devDependencies": {},
+  "format": "global",
+  "dependencies": {
+    "angular": "angular@^1",
+    "raf": "raf@https://gist.githubusercontent.com/paulirish/1579671/raw/3d42a3a76ed09890434a07be2212f376959e616f/rAF.js",
+    "css": "jspm:css@*"
+  }
+}

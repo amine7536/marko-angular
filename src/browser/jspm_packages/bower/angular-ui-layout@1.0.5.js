@@ -1,0 +1,1 @@
+module.exports = require("bower:angular-ui-layout@1.0.5/ui-layout");

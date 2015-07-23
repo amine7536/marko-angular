@@ -1,0 +1,10 @@
+{
+  "name": "angular",
+  "version": "1.4.3",
+  "homepage": "https://github.com/angular/bower-angular",
+  "registry": "bower",
+  "main": "./angular.js",
+  "devDependencies": {},
+  "format": "global",
+  "dependencies": {}
+}

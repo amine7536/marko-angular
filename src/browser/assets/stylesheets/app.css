@@ -1,0 +1,41 @@
+/* app css stylesheet */
+
+.CodeMirror {
+    width: 100%;
+    height: auto;
+    transform: translateZ(0);  /* activation de l'AM */
+}
+
+textarea{
+    height: 100%;
+    width: 100%;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+.glyphicon-chevron-left,
+.glyphicon-chevron-right,
+.glyphicon-chevron-up,
+.glyphicon-chevron-down{
+    color: dimgray;
+}
+
+.preview {
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 5px;
+    padding-bottom: 10px;
+    z-index: 10;
+    transform: translateZ(0);  /* activation de l'AM */
+}
+
+.overlay{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    z-index: 10;
+    background-color: rgba(0,0,0,0.5); /*dim the background*/
+}

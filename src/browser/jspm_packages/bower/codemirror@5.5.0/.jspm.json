@@ -1,0 +1,12 @@
+{
+  "name": "codemirror",
+  "version": "5.5.0",
+  "homepage": "https://github.com/marijnh/CodeMirror",
+  "registry": "bower",
+  "main": "lib/codemirror.js",
+  "devDependencies": {},
+  "format": "global",
+  "dependencies": {
+    "css": "jspm:css@*"
+  }
+}

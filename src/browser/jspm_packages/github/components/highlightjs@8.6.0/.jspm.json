@@ -1,0 +1,7 @@
+{
+  "jspm": {
+    "main": "highlight.pack"
+  },
+  "main": "highlight.pack",
+  "registry": "github"
+}

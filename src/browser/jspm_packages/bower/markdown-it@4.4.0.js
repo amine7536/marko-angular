@@ -1,0 +1,1 @@
+module.exports = require("bower:markdown-it@4.4.0/dist/markdown-it");

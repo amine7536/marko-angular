@@ -1,0 +1,1 @@
+module.exports = require("bower:markdown-it-footnote@1.0.0/dist/markdown-it-footnote");

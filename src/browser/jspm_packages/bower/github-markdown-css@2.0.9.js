@@ -1,0 +1,1 @@
+module.exports = require("bower:github-markdown-css@2.0.9/github-markdown.css!css");
