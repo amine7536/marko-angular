@@ -1,5 +1,5 @@
 
-export var EditorMarkdownComponent = function () {
+export var EditorMarkdownItComponent = function () {
     // Because highlight.js is a bit awkward at times
     var languageOverrides = {
         js: 'javascript',
@@ -8,6 +8,7 @@ export var EditorMarkdownComponent = function () {
 
     // HighlightJS
     //var hljs = window.hljs;
+
 
     // MarkDown-IT
     var md = markdownit({
@@ -22,10 +23,7 @@ export var EditorMarkdownComponent = function () {
             }
             return '';
         }
-    });
-
-    console.log('in dir');
-
+    }).use(markdownitFootnote);
 
     return {
         restrict: 'A',
@@ -33,7 +31,6 @@ export var EditorMarkdownComponent = function () {
             function renderMarkdown() {
                 var htmlText = md.render(scope.$eval(attrs.markdown) || '');
                 element.html(htmlText);
-                console.log('rendering');
             }
 
             scope.$watch(attrs.markdown, renderMarkdown);

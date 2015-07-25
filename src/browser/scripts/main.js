@@ -11,8 +11,13 @@ export var mainModule = angular.module("markoApp", [
         'ngRoute',
         editorModule.name
     ])
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.otherwise({redirectTo: '/editor'});
+    .config(['$routeProvider','$locationProvider', function ($routeProvider, $locationProvider) {
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+            //baseHref: __dirname
+        });
+        $routeProvider.otherwise({redirectTo: 'editor'});
     }])
     .directive('resize', ['$window', function($window) {
         return {

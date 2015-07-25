@@ -16,16 +16,17 @@ import 'angular-ui-layout'
 import '../../jspm_packages/bower/angular-ui-layout@1.0.5/ui-layout.css!'
 
 import markdownit from 'markdown-it'
-import 'markdown-it-footnote'
+import markdownitFootnote from 'markdown-it-footnote'
 import 'github-markdown-css'
 
 import hljs from 'highlightjs'
+import '../../jspm_packages/github/components/highlightjs@8.6.0/styles/github.css!'
 
 
 /** Editor Module **/
 import { EditorCtrl }               from './editor.controller';
 import { EditorRoute }              from './editor.route';
-import { EditorMarkdownComponent }  from './editor.directive';
+import { EditorMarkdownItComponent }  from './editor.directive';
 
 
 var editorModule = angular.module("markoApp.Editor", [
@@ -36,6 +37,6 @@ var editorModule = angular.module("markoApp.Editor", [
 
 editorModule.config(EditorRoute);
 editorModule.controller('editorCtrl', EditorCtrl);
-editorModule.directive('markdown', EditorMarkdownComponent);
+editorModule.directive('markdown', EditorMarkdownItComponent);
 
 export { editorModule };

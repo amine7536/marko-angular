@@ -6,7 +6,7 @@ class EditorCtrl {
         console.log(this.electronVersion);
 
         $scope.editorOptions = {
-            theme: 'cobalt',
+            //theme: 'cobalt',
             gfm: true,
             tables: true,
             breaks: false,
@@ -14,7 +14,7 @@ class EditorCtrl {
             sanitize: true,
             smartLists: true,
             smartypants: false,
-            lineNumbers: false,
+            lineNumbers: true,
             lineWrapping: true,
             viewportMargin: 10,
             mode: 'markdown'
