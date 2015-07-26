@@ -9,10 +9,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "electron-rebuild": "^0.2.5",
     "gulp": "^3.9.0",
     "gulp-babel": "^5.1.0",
+    "gulp-concat": "^2.6.0",
     "gulp-rename": "^1.2.2",
-    "gulp-run": "^1.6.8"
+    "gulp-run": "^1.6.10",
+    "gulp-sourcemaps": "^1.5.2"
   },
   "jspm": {
     "directories": {
@@ -30,7 +33,7 @@
       "jquery": "github:components/jquery@^2.1.4",
       "markdown-it": "bower:markdown-it@^4.4.0",
       "markdown-it-footnote": "bower:markdown-it-footnote@^1.0.0",
-      "raf": "bower:file:./src/browser/jspm_packages/bower/raf/rAF.js@latest",
+      "raf": "bower:file:./src/browser/jspm_packages/bower/raf@latest/rAF.js",
       "text": "github:systemjs/plugin-text@^0.0.2"
     },
     "devDependencies": {
@@ -38,5 +41,11 @@
       "babel-runtime": "npm:babel-runtime@^5.1.13",
       "core-js": "npm:core-js@^0.9.4"
     }
+  },
+  "dependencies": {
+    "fs-plus": "^2.8.1",
+    "gulp": "^3.9.0",
+    "nslog": "^2.0.0",
+    "yargs": "^3.15.0"
   }
 }
