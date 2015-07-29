@@ -48,6 +48,21 @@
       ]
     },
     {
+      "label": "File",
+      "submenu": [
+        {
+          "label": "New",
+          "selector": "application:new-file",
+          "accelerator": "Command+N"
+        },
+        {
+          "label": "Open...",
+          "selector": "application:open-file",
+          "accelerator": "Command+O"
+        }
+      ]
+    },
+    {
       "label": "Edit",
       "submenu": [
         {
@@ -88,11 +103,6 @@
     {
       "label": "View",
       "submenu": [
-        {
-          "label": "Reload",
-          "command": "window:reload",
-          "accelerator": "Command+R"
-        },
         {
           "label": "Toggle Full Screen",
           "command": "window:toggle-full-screen",

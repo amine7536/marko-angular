@@ -43,17 +43,20 @@ var ApplicationMenu = (function (_EventEmitter) {
     }, {
         key: 'wireUpMenu',
         value: function wireUpMenu(menu, command) {
-
             var _this = this;
-            menu.click = function () {
-                /*console.log(_this);
-                  console.log('menu.click ' + command);
-                console.log('----------------');
-                console.log('menu.click.this ' + menu.constructor.name);
-                console.log(_this);
-                console.log('----------------');*/
 
-                _this.emit(command);
+            console.log('menu.click ' + menu);
+            console.log('----------------');
+            console.log('menu.click.this ' + menu.constructor.name);
+            console.log(this);
+            console.log('----------------');
+
+            menu.click = function () {
+                console.log(_this);
+
+                _this.emit(command, function () {
+                    console.log('emitted ' + command);
+                });
             };
         }
     }, {

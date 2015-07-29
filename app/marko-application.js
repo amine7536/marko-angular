@@ -6,7 +6,7 @@ var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_ag
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Menu = require('menu'),
     BrowserWindow = require('browser-window'),
@@ -18,14 +18,14 @@ var Menu = require('menu'),
     net = require('net'),
     url = require('url'),
     spawn = require('child_process'),
-    EventEmitter = require('events').EventEmitter,
+    events = require('events'),
     _ = require('underscore-plus');
 
 var ApplicationMenu = require('./application-menu'),
     AppWindow = require('./application-window');
 
-var Application = (function (_EventEmitter) {
-    _inherits(Application, _EventEmitter);
+var Application = (function (_events$EventEmitter) {
+    _inherits(Application, _events$EventEmitter);
 
     function Application(options) {
         _classCallCheck(this, Application);
@@ -46,6 +46,8 @@ var Application = (function (_EventEmitter) {
             return app.quit();
         }
 
+        this.handleEvents(options);
+
         //return this.openWithOptions(options);
         this.openWithOptions(options);
     }
@@ -60,17 +62,21 @@ var Application = (function (_EventEmitter) {
 
             if (test) {
                 newWindow = this.openSpecsWindow(options);
+                console.log("specWindow");
             } else {
                 newWindow = this.openWindow(options);
+                console.log("normalWindow");
             }
 
             newWindow.show();
             this.windows.push(newWindow);
+            console.log("Push window to window array " + this.windows.length);
 
-            var _this = this;
-            newWindow.on('closed', function () {
+            /*var _this = this;*/
+            newWindow.on('closed', (function (_this) {
                 _this.removeAppWindow(newWindow);
-            });
+                console.log("remove window from window array " + _this.windows.length);
+            })(this));
 
             return newWindow;
         }
@@ -144,6 +150,21 @@ var Application = (function (_EventEmitter) {
                 return BrowserWindow.getFocusedWindow().toggleDevTools();
             });
 
+            /*this.menu.on('application:new-file', function(){
+                console.log("TTTTTTTTTTTTTT ------ application:new-file trapped");
+                this.openWithOptions(options);
+            });*/
+
+            /*this.menu.on('application:new-file', (function(_this) {
+                console.log("TTTTTTTTTTTTTT ------ application:new-file trapped");
+                console.log(_this.windows.constructor.name);
+                 return function() {
+                    return _this.openWithOptions({
+                        test: false
+                    });
+                };
+            })(this));*/
+
             this.menu.on('application:run-specs', (function (_this) {
                 return function () {
                     return _this.openWithOptions({
@@ -156,25 +177,46 @@ var Application = (function (_EventEmitter) {
         }
     }, {
         key: 'removeAppWindow',
-        value: function removeAppWindow(_this) {
-            return function (appWindow) {
-                var i, idx, len, ref, results, w;
-                ref = _this.windows;
-                results = [];
-                for (idx = i = 0, len = ref.length; i < len; idx = ++i) {
-                    w = ref[idx];
-                    if (w === appWindow) {
-                        results.push(_this.windows.splice(idx, 1));
-                    }
+        value: function removeAppWindow(appWindow) {
+            var i, idx, len, ref, results, w;
+            ref = this.windows;
+            results = [];
+            for (idx = i = 0, len = ref.length; i < len; idx = ++i) {
+                w = ref[idx];
+                if (w === appWindow) {
+                    results.push(this.windows.splice(idx, 1));
                 }
-                return results;
-            };
+            }
+            return results;
+        }
+    }, {
+        key: 'handleEvents',
+        value: function handleEvents(options) {
+            /*        var _this = this;
+                    console.log("handleEvents: " + this.constructor.name);
+                    this.on('application:new-file', function() {
+                        console.log("TTTTTTTTTTTTTTTTTTTTTTT");
+                        _this.openWindow(options);
+                    });*/
+
+            console.log("handleEvents: " + this.constructor.name);
+
+            this.on('application:new-file', (function (_this) {
+                console.log("TTTTTTTTTTTTTT ------ application:new-file trapped");
+                console.log(_this.windows.constructor.name);
+
+                return function () {
+                    return _this.openWithOptions({
+                        test: false
+                    });
+                };
+            })(this));
         }
 
         // End Class
     }]);
 
     return Application;
-})(EventEmitter);
+})(events.EventEmitter);
 
 module.exports = Application;

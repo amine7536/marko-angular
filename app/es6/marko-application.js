@@ -11,7 +11,7 @@ let
     net = require('net'),
     url = require('url'),
     spawn = require('child_process'),
-    EventEmitter = require('events').EventEmitter,
+    events = require('events'),
     _ = require('underscore-plus');
 
 let
@@ -19,7 +19,7 @@ let
     AppWindow = require('./application-window');
 
 
-class Application extends EventEmitter {
+class Application extends events.EventEmitter {
 
     constructor(options) {
         super();
@@ -38,6 +38,9 @@ class Application extends EventEmitter {
             return app.quit();
         }
 
+        this.handleEvents(options);
+
+
         //return this.openWithOptions(options);
         this.openWithOptions(options);
     }
@@ -50,17 +53,23 @@ class Application extends EventEmitter {
 
         if (test) {
             newWindow = this.openSpecsWindow(options);
+            console.log("specWindow");
         } else {
             newWindow = this.openWindow(options);
+            console.log("normalWindow");
         }
 
         newWindow.show();
         this.windows.push(newWindow);
+        console.log("Push window to window array " + this.windows.length);
 
-        var _this = this;
-        newWindow.on('closed', function () {
+
+        /*var _this = this;*/
+        newWindow.on('closed', (function (_this) {
             _this.removeAppWindow(newWindow);
-        });
+            console.log("remove window from window array " + _this.windows.length);
+        })(this));
+
 
         return newWindow;
     }
@@ -135,6 +144,22 @@ class Application extends EventEmitter {
             return BrowserWindow.getFocusedWindow().toggleDevTools();
         });
 
+        /*this.menu.on('application:new-file', function(){
+            console.log("TTTTTTTTTTTTTT ------ application:new-file trapped");
+            this.openWithOptions(options);
+        });*/
+
+        /*this.menu.on('application:new-file', (function(_this) {
+            console.log("TTTTTTTTTTTTTT ------ application:new-file trapped");
+            console.log(_this.windows.constructor.name);
+
+            return function() {
+                return _this.openWithOptions({
+                    test: false
+                });
+            };
+        })(this));*/
+
         this.menu.on('application:run-specs', (function(_this) {
             return function() {
                 return _this.openWithOptions({
@@ -146,19 +171,42 @@ class Application extends EventEmitter {
         return appWindow;
     }
 
-    removeAppWindow(_this) {
-        return function(appWindow) {
-            var i, idx, len, ref, results, w;
-            ref = _this.windows;
-            results = [];
-            for (idx = i = 0, len = ref.length; i < len; idx = ++i) {
-                w = ref[idx];
-                if (w === appWindow) {
-                    results.push(_this.windows.splice(idx, 1));
-                }
+    removeAppWindow(appWindow) {
+        var i, idx, len, ref, results, w;
+        ref = this.windows;
+        results = [];
+        for (idx = i = 0, len = ref.length; i < len; idx = ++i) {
+            w = ref[idx];
+            if (w === appWindow) {
+                results.push(this.windows.splice(idx, 1));
             }
-            return results;
-        };
+        }
+        return results;
+    }
+
+    handleEvents(options) {
+/*        var _this = this;
+        console.log("handleEvents: " + this.constructor.name);
+        this.on('application:new-file', function() {
+            console.log("TTTTTTTTTTTTTTTTTTTTTTT");
+            _this.openWindow(options);
+        });*/
+
+        console.log("handleEvents: " + this.constructor.name);
+
+        this.on('application:new-file', (function(_this) {
+            console.log("TTTTTTTTTTTTTT ------ application:new-file trapped");
+            console.log(_this.windows.constructor.name);
+
+            return function() {
+                return _this.openWithOptions({
+                    test: false
+                });
+            };
+        })(this));
+
+
+
     }
 
 

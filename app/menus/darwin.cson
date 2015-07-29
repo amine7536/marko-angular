@@ -16,6 +16,15 @@
   }
 
   {
+    label: 'File'
+    submenu: [
+      { label: 'New', command: 'application:new-file', accelerator: 'Command+N' }
+      { label: 'Open', command: 'application:open-file', accelerator: 'Command+O' }
+      { label: 'Save', command: 'application:save-file', accelerator: 'Command+S' }
+    ]
+  }
+
+  {
     label: 'Edit'
     submenu: [
       { label: 'Undo', selector: 'undo:', accelerator: 'Command+Z' }
@@ -31,7 +40,6 @@
   {
     label: 'View'
     submenu: [
-      { label: 'Reload', command: 'window:reload', accelerator: 'Command+R' }
       { label: 'Toggle Full Screen', command: 'window:toggle-full-screen', accelerator: 'Command+Control+F' }
       {
         label: 'Developer'

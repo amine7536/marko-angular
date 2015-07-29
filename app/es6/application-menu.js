@@ -13,36 +13,49 @@ class ApplicationMenu extends EventEmitter {
     constructor(options){
         super();
 
-        console.log("AppMenu OPTIONS " + options);
+        console.log("AppMenu Options " + options.toString());
         //console.log("DIR PATH " + path.join(__dirname, 'menus', process.platform + ".json"));
 
         //var menuJson = season.resolve(path.join(process.resourcesPath, 'app.asar', 'menus', process.platform + ".json"));
-        var menuJson = season.resolve(path.join(__dirname, 'menus', process.platform + ".json"));
+        var menuJson = season.resolve(path.join(__dirname, 'menus', process.platform + ".cson"));
         var template = season.readFileSync(menuJson);
         //return this.template = this.translateTemplate(template.menu, options.pkg);
         this.template = this.translateTemplate(template.menu, options.pkg);
+
     }
 
     attachToWindow(window) {
         this.menu = Menu.buildFromTemplate(_.deepClone(this.template));
-        return Menu.setApplicationMenu(this.menu);
+        Menu.setApplicationMenu(this.menu);
     }
 
     wireUpMenu(menu, command) {
-        return menu.click = (function(_this) {
-            return function() {
-                return _this.emit(command);
-            };
-        })(this);
+
+        var _this = this;
+        menu.click = function() {
+            /*console.log(_this);
+
+
+            console.log('menu.click ' + command);
+            console.log('----------------');
+            console.log('menu.click.this ' + menu.constructor.name);
+            console.log(_this);
+            console.log('----------------');*/
+
+
+            _this.emit(command);
+        };
     }
 
     translateTemplate(template, pkgJson) {
+
         var emitter, i, item, len;
 
         emitter = this.emit;
 
         for (i = 0, len = template.length; i < len; i++) {
             item = template[i];
+
             if (item.metadata == null) {
                 item.metadata = {};
             }
