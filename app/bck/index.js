@@ -18,7 +18,7 @@ path = require('path');
 fs = require('fs-plus');
 spawn = require('child_process').spawn;
 BrowserWindow = require('browser-window');
-Application = require('./marko-application');
+Application = require('./application');
 nslog = console.log;
 
 global.shellStartTime = Date.now();
@@ -98,7 +98,7 @@ start = function () {
             Application = require(path.join(args.resourcePath, 'src', 'browser', 'application'));
         } else {
 
-            Application = require('./marko-application');
+            Application = require('./application');
         }
 
         global.application = new Application(args);
@@ -106,7 +106,7 @@ start = function () {
             return console.log("App load time: " + (Date.now() - global.shellStartTime) + "ms");
         }
 
-        //Application.open();
+        Application.open();
     });
 };
 

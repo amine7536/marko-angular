@@ -1,16 +1,17 @@
 'use strict';
 
-var Application = undefined,
-    BrowserWindow = undefined,
-    app = undefined,
-    fs = undefined,
-    nslog = undefined,
-    parseCommandLine = undefined,
-    path = undefined,
-    setupCoffeeScript = undefined,
-    spawn = undefined,
-    start = undefined,
-    url = undefined;
+let
+    Application,
+    BrowserWindow,
+    app,
+    fs,
+    nslog,
+    parseCommandLine,
+    path,
+    setupCoffeeScript,
+    spawn,
+    start,
+    url;
 
 app = require('app');
 url = require('url');
@@ -23,7 +24,7 @@ nslog = console.log;
 
 global.shellStartTime = Date.now();
 
-process.on('uncaughtException', function (error) {
+process.on('uncaughtException', function(error) {
     if (error == null) {
         error = {};
     }
@@ -35,20 +36,26 @@ process.on('uncaughtException', function (error) {
     }
 });
 
-parseCommandLine = function () {
+
+parseCommandLine = function() {
 
     var args, devMode, exitWhenDone, help, logFile, resourcePath, test, version, yargs;
 
     version = app.getVersion();
 
     yargs = require('yargs');
-    yargs.alias('d', 'dev').boolean('d').describe('d', 'Run in development mode.').alias('h', 'help').boolean('h').describe('h', 'Print this usage message.').alias('l', 'log-file').string('l').describe('l', 'Log all output to file.').alias('r', 'resource-path').string('r').describe('r', 'Set the path to the App source directory and enable dev-mode.').alias('t', 'test').boolean('t').describe('t', 'Run the specified specs and exit with error code on failures.').alias('v', 'version').boolean('v').describe('v', 'Print the version.');
+    yargs.alias('d', 'dev').boolean('d').describe('d', 'Run in development mode.')
+        .alias('h', 'help').boolean('h').describe('h', 'Print this usage message.')
+        .alias('l', 'log-file').string('l').describe('l', 'Log all output to file.')
+        .alias('r', 'resource-path').string('r').describe('r', 'Set the path to the App source directory and enable dev-mode.')
+        .alias('t', 'test').boolean('t').describe('t', 'Run the specified specs and exit with error code on failures.')
+        .alias('v', 'version').boolean('v').describe('v', 'Print the version.');
     args = yargs.parse(process.argv.slice(1));
 
     process.stdout.write(JSON.stringify(args) + "\n");
     if (args.help) {
         help = "";
-        yargs.showHelp(function (s) {
+        yargs.showHelp(function(s) {
             return help += s;
         });
         process.stdout.write(help + "\n");
@@ -84,18 +91,20 @@ parseCommandLine = function () {
     };
 };
 
-start = function () {
+
+start = function() {
     var args;
 
     args = parseCommandLine();
     if (args.devMode) {
         app.commandLine.appendSwitch('remote-debugging-port', '8315');
     }
-    return app.on('ready', function () {
+    return app.on('ready', function() {
 
         if (args.devMode) {
 
             Application = require(path.join(args.resourcePath, 'src', 'browser', 'application'));
+
         } else {
 
             Application = require('./marko-application');
