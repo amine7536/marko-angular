@@ -115,7 +115,7 @@ start = function() {
             return console.log("App load time: " + (Date.now() - global.shellStartTime) + "ms");
         }
 
-        Application.open();
+        //Application.open();
     });
 };
 

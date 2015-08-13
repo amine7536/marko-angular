@@ -21,7 +21,7 @@ class AppWindow extends EventEmitter {
         var ref, windowOpts;
 
         this.loadSettings = {
-            //bootstrapScript: require.resolve('../renderer/main')
+            bootstrapScript: require.resolve('../renderer/main')
         };
 
         this.loadSettings = _.extend(this.loadSettings, options);

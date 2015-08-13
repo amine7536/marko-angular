@@ -3,6 +3,7 @@
 let
     Menu = require('menu'),
     BrowserWindow = require('browser-window'),
+    Dialog = require('dialog'),
     app = require('app'),
     fs = require('fs-plus'),
     ipc = require('ipc'),
@@ -38,9 +39,6 @@ class Application extends events.EventEmitter {
             return app.quit();
         }
 
-        this.handleEvents(options);
-
-
         //return this.openWithOptions(options);
         this.openWithOptions(options);
     }
@@ -61,14 +59,12 @@ class Application extends events.EventEmitter {
 
         newWindow.show();
         this.windows.push(newWindow);
-        console.log("Push window to window array " + this.windows.length);
+        console.log("Push window to windows array " + this.windows.length);
 
-
-        /*var _this = this;*/
-        newWindow.on('closed', (function (_this) {
+        var _this = this;
+        newWindow.on('closed', function () {
             _this.removeAppWindow(newWindow);
-            console.log("remove window from window array " + _this.windows.length);
-        })(this));
+        });
 
 
         return newWindow;
@@ -105,17 +101,12 @@ class Application extends events.EventEmitter {
     }
 
     openWindow(options) {
-        var appWindow;
 
-        appWindow = new AppWindow(options);
+        var appWindow = new AppWindow(options);
 
         this.menu = new ApplicationMenu({
             pkg: this.pkgJson
         });
-
-
-        console.log(appWindow.constructor.name);
-        console.log("this.menu : " + this.menu.constructor.name);
 
 
         this.menu.attachToWindow(appWindow);
@@ -144,21 +135,6 @@ class Application extends events.EventEmitter {
             return BrowserWindow.getFocusedWindow().toggleDevTools();
         });
 
-        /*this.menu.on('application:new-file', function(){
-            console.log("TTTTTTTTTTTTTT ------ application:new-file trapped");
-            this.openWithOptions(options);
-        });*/
-
-        /*this.menu.on('application:new-file', (function(_this) {
-            console.log("TTTTTTTTTTTTTT ------ application:new-file trapped");
-            console.log(_this.windows.constructor.name);
-
-            return function() {
-                return _this.openWithOptions({
-                    test: false
-                });
-            };
-        })(this));*/
 
         this.menu.on('application:run-specs', (function(_this) {
             return function() {
@@ -167,6 +143,16 @@ class Application extends events.EventEmitter {
                 });
             };
         })(this));
+
+
+        var _this = this;
+        this.menu.on('application:new-file', function() {
+            _this.openWithOptions(options)
+        });
+
+        this.menu.on('application:open-file', function() {
+            _this.openFile()
+        });
 
         return appWindow;
     }
@@ -181,32 +167,12 @@ class Application extends events.EventEmitter {
                 results.push(this.windows.splice(idx, 1));
             }
         }
+        console.log("Remove window from windows array " + this.windows.length);
         return results;
     }
 
-    handleEvents(options) {
-/*        var _this = this;
-        console.log("handleEvents: " + this.constructor.name);
-        this.on('application:new-file', function() {
-            console.log("TTTTTTTTTTTTTTTTTTTTTTT");
-            _this.openWindow(options);
-        });*/
-
-        console.log("handleEvents: " + this.constructor.name);
-
-        this.on('application:new-file', (function(_this) {
-            console.log("TTTTTTTTTTTTTT ------ application:new-file trapped");
-            console.log(_this.windows.constructor.name);
-
-            return function() {
-                return _this.openWithOptions({
-                    test: false
-                });
-            };
-        })(this));
-
-
-
+    openFile() {
+        console.log(Dialog.showOpenDialog({ properties: [ 'openFile', 'openDirectory', 'multiSelections' ]}));
     }
 
 

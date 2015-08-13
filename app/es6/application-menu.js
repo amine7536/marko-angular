@@ -33,16 +33,6 @@ class ApplicationMenu extends EventEmitter {
 
         var _this = this;
         menu.click = function() {
-            /*console.log(_this);
-
-
-            console.log('menu.click ' + command);
-            console.log('----------------');
-            console.log('menu.click.this ' + menu.constructor.name);
-            console.log(_this);
-            console.log('----------------');*/
-
-
             _this.emit(command);
         };
     }
