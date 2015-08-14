@@ -39,7 +39,7 @@ var AppWindow = (function (_EventEmitter) {
         windowOpts = {
             width: 800,
             height: 600,
-            title: (ref = options.title) != null ? ref : "You Should Set options.title",
+            title: 'Marko',
             'web-preferences': {
                 'subpixel-font-scaling': true,
                 'direct-write': true
@@ -48,6 +48,9 @@ var AppWindow = (function (_EventEmitter) {
         windowOpts = _.extend(windowOpts, this.loadSettings);
 
         this.window = new BrowserWindow(windowOpts);
+
+        // Attached Markdonw Document to BrowserWindow
+        this.window.mddoc = options.mddoc;
 
         this.window.on('closed', (function (_this) {
             return function (e) {
