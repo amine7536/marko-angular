@@ -3,12 +3,16 @@ import angular from 'angular';
 import 'angular-route';
 import $ from 'jquery';
 
+
 /** Import Application Modules **/
+import { coreModule } from './core/core.module';
 import { editorModule } from './editor/editor.module';
+
 
 
 export var mainModule = angular.module("markoApp", [
         'ngRoute',
+        coreModule.name,
         editorModule.name
     ])
     .config(['$routeProvider','$locationProvider', function ($routeProvider, $locationProvider) {

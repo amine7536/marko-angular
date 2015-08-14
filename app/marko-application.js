@@ -158,7 +158,7 @@ var Application = (function (_events$EventEmitter) {
             });
 
             this.menu.on('application:open-file', function () {
-                _this.openFile();
+                _this.openFile(options);
             });
 
             return appWindow;
@@ -180,8 +180,31 @@ var Application = (function (_events$EventEmitter) {
         }
     }, {
         key: 'openFile',
-        value: function openFile() {
-            console.log(Dialog.showOpenDialog({ properties: ['openFile', 'openDirectory', 'multiSelections'] }));
+        value: function openFile(options) {
+
+            var dialogOptions = {
+                title: 'OpenFileTitle',
+                properties: ['openFile', 'openDirectory', 'multiSelections']
+            };
+            var _this = this;
+            Dialog.showOpenDialog(dialogOptions, function (files) {
+                fs.readFile(files[0], 'utf8', function (err, data) {
+                    if (err) {
+                        return console.log(err);
+                    } else {
+
+                        options.mddoc = {
+                            path: files[0],
+                            content: data
+                        };
+
+                        // Open new window with options.mddoc
+                        _this.openWithOptions(options);
+                        // Clear mddoc so new windows don't load with mmdoc
+                        options.mddoc = null;
+                    }
+                });
+            });
         }
 
         // End Class
