@@ -47,10 +47,25 @@ var AppWindow = (function (_EventEmitter) {
         };
         windowOpts = _.extend(windowOpts, this.loadSettings);
 
+        /** Init BrowserWindow with provided options **/
         this.window = new BrowserWindow(windowOpts);
 
-        // Attached Markdonw Document to BrowserWindow
-        this.window.mddoc = options.mddoc;
+        /**
+         *  Attached Markdown Buffer Document to BrowserWindow
+         *  If options.bufferdoc exists from openfile add it to currentWindow
+         *  or initialize empty buffer vars
+         * **/
+        if (options.bufferdoc != null) {
+            this.window.bufferdoc = options.bufferdoc;
+            console.log("=========================");
+            console.log(this.window.bufferdoc);
+            console.log("=========================");
+        } else {
+            this.window.bufferdoc = {
+                path: '',
+                content: ''
+            };
+        }
 
         this.window.on('closed', (function (_this) {
             return function (e) {

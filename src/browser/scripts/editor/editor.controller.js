@@ -29,8 +29,8 @@ class EditorCtrl {
             _editor.focus();
 
             /** Load Markdown Document if attached to window **/
-            if(browserWindow.mddoc) {
-                _doc.setValue(browserWindow.mddoc.content);
+            if(browserWindow.bufferdoc.content != '') {
+                _doc.setValue(browserWindow.bufferdoc.content);
             }
 
 

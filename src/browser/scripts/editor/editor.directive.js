@@ -1,5 +1,6 @@
+'use-strict';
 
-export var EditorMarkdownItComponent = function () {
+var EditorMarkdownItComponent = function (coreService) {
     // Because highlight.js is a bit awkward at times
     var languageOverrides = {
         js: 'javascript',
@@ -29,7 +30,18 @@ export var EditorMarkdownItComponent = function () {
         restrict: 'A',
         link: function (scope, element, attrs) {
             function renderMarkdown() {
-                var htmlText = md.render(scope.$eval(attrs.markdown) || '');
+
+                var docbuffer = scope.$eval(attrs.markdown) || '';
+
+                /**
+                 *
+                 * Keep ngModel in sync with currentBrowserWindow bufferdoc
+                 *
+                 * **/
+                var browserWindow = coreService.browserWindow;
+                browserWindow.bufferdoc.content = docbuffer;
+
+                var htmlText = md.render(docbuffer);
                 element.html(htmlText);
             }
 
@@ -38,3 +50,7 @@ export var EditorMarkdownItComponent = function () {
         }
     };
 };
+
+EditorMarkdownItComponent.$inject = ['coreService'];
+
+export { EditorMarkdownItComponent };

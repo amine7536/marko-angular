@@ -152,6 +152,7 @@ var Application = (function (_events$EventEmitter) {
                 };
             })(this));
 
+            /** Menu events **/
             var _this = this;
             this.menu.on('application:new-file', function () {
                 _this.openWithOptions(options);
@@ -159,6 +160,9 @@ var Application = (function (_events$EventEmitter) {
 
             this.menu.on('application:open-file', function () {
                 _this.openFile(options);
+            });
+            this.menu.on('application:save-file', function () {
+                _this.saveFile(options);
             });
 
             return appWindow;
@@ -183,7 +187,7 @@ var Application = (function (_events$EventEmitter) {
         value: function openFile(options) {
 
             var dialogOptions = {
-                title: 'OpenFileTitle',
+                title: 'OpenFileDialog',
                 properties: ['openFile', 'openDirectory', 'multiSelections']
             };
             var _this = this;
@@ -193,17 +197,36 @@ var Application = (function (_events$EventEmitter) {
                         return console.log(err);
                     } else {
 
-                        options.mddoc = {
+                        options.bufferdoc = {
                             path: files[0],
                             content: data
                         };
 
                         // Open new window with options.mddoc
                         _this.openWithOptions(options);
-                        // Clear mddoc so new windows don't load with mmdoc
-                        options.mddoc = null;
+
+                        // Clear buffer doc so new windows don't load with previously opened doc
+                        options.bufferdoc = null;
                     }
                 });
+            });
+        }
+    }, {
+        key: 'saveFile',
+        value: function saveFile(options) {
+
+            var focusedWindow = BrowserWindow.getFocusedWindow();
+
+            console.log("-----------------------");
+            console.log(focusedWindow.bufferdoc);
+            console.log("-----------------------");
+
+            var dialogOptions = {
+                title: 'SaveFileDialog'
+            };
+            var _this = this;
+            Dialog.showSaveDialog(dialogOptions, function (files) {
+                console.log('---- Save ----');
             });
         }
 
