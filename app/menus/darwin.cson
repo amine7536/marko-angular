@@ -21,7 +21,8 @@
       { label: 'New', command: 'application:new-file', accelerator: 'Command+N' }
       { label: 'Open', command: 'application:open-file', accelerator: 'Command+O' }
       { label: 'Save', command: 'application:save-file', accelerator: 'Command+S' }
-    ]
+      { label: 'Save As', command: 'application:save-as-file', accelerator: 'Shift+Command+S' }
+]
   }
 
   {

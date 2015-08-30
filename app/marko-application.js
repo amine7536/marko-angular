@@ -217,16 +217,35 @@ var Application = (function (_events$EventEmitter) {
 
             var focusedWindow = BrowserWindow.getFocusedWindow();
 
-            console.log("-----------------------");
-            console.log(focusedWindow.bufferdoc);
-            console.log("-----------------------");
+            if (!focusedWindow.bufferdoc.path) {
+                this.saveAsFile(options);
+            } else {
+                this.save(focusedWindow.bufferdoc.path, focusedWindow.bufferdoc.content);
+            }
+        }
+    }, {
+        key: 'saveAsFile',
+        value: function saveAsFile(options) {
+
+            var focusedWindow = BrowserWindow.getFocusedWindow();
 
             var dialogOptions = {
                 title: 'SaveFileDialog'
             };
+
             var _this = this;
-            Dialog.showSaveDialog(dialogOptions, function (files) {
+            Dialog.showSaveDialog(dialogOptions, function (file) {
                 console.log('---- Save ----');
+                _this.save(file, focusedWindow.bufferdoc.content);
+                focusedWindow.bufferdoc.path = file;
+            });
+        }
+    }, {
+        key: 'save',
+        value: function save(file, content) {
+            fs.writeFile(file, content, function (err) {
+                if (err) throw err;
+                console.log('File Saved');
             });
         }
 
