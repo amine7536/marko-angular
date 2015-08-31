@@ -6,12 +6,12 @@ let
     Dialog = require('dialog'),
     app = require('app'),
     fs = require('fs-plus'),
-    ipc = require('ipc'),
-    path = require('path'),
-    os = require('os'),
-    net = require('net'),
-    url = require('url'),
-    spawn = require('child_process'),
+    //ipc = require('ipc'),
+    //path = require('path'),
+    //os = require('os'),
+    //net = require('net'),
+    //url = require('url'),
+    //spawn = require('child_process'),
     events = require('events'),
     _ = require('underscore-plus');
 

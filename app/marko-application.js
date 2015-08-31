@@ -13,13 +13,14 @@ var Menu = require('menu'),
     Dialog = require('dialog'),
     app = require('app'),
     fs = require('fs-plus'),
-    ipc = require('ipc'),
-    path = require('path'),
-    os = require('os'),
-    net = require('net'),
-    url = require('url'),
-    spawn = require('child_process'),
-    events = require('events'),
+
+//ipc = require('ipc'),
+//path = require('path'),
+//os = require('os'),
+//net = require('net'),
+//url = require('url'),
+//spawn = require('child_process'),
+events = require('events'),
     _ = require('underscore-plus');
 
 var ApplicationMenu = require('./application-menu'),
@@ -163,6 +164,9 @@ var Application = (function (_events$EventEmitter) {
             });
             this.menu.on('application:save-file', function () {
                 _this.saveFile(options);
+            });
+            this.menu.on('application:save-as-file', function () {
+                _this.saveAsFile(options);
             });
 
             return appWindow;

@@ -1,4 +1,5 @@
 'use strict';
+require('cache-require-paths');
 
 var Application = undefined,
     BrowserWindow = undefined,

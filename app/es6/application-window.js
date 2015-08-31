@@ -3,11 +3,11 @@
 let
     Menu = require('menu'),
     app = require('app'),
-    fs = require('fs'),
-    ipc = require('ipc'),
+    //fs = require('fs'),
+    //ipc = require('ipc'),
     path = require('path'),
-    os = require('os'),
-    net = require('net'),
+    //os = require('os'),
+    //net = require('net'),
     url = require('url'),
     EventEmitter = require('events').EventEmitter,
     BrowserWindow = require('browser-window'),
@@ -47,10 +47,6 @@ class AppWindow extends EventEmitter {
          * **/
         if(options.bufferdoc != null) {
             this.window.bufferdoc = options.bufferdoc;
-            console.log("=========================");
-            console.log(this.window.bufferdoc);
-            console.log("=========================");
-
         } else {
             this.window.bufferdoc = {
                 path: '',
@@ -80,7 +76,6 @@ class AppWindow extends EventEmitter {
     }
 
     show(){
-        console.log("Show func : " + __dirname);
         //var targetPath = path.resolve(__dirname, '..', '..', 'static', 'index.html');
         var targetPath = path.resolve(__dirname, '..', 'src', 'browser', 'index.html');
         var targetUrl = url.format({
