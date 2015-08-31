@@ -10,12 +10,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 var Menu = require('menu'),
     app = require('app'),
-    fs = require('fs'),
-    ipc = require('ipc'),
-    path = require('path'),
-    os = require('os'),
-    net = require('net'),
-    url = require('url'),
+
+//fs = require('fs'),
+//ipc = require('ipc'),
+path = require('path'),
+
+//os = require('os'),
+//net = require('net'),
+url = require('url'),
     EventEmitter = require('events').EventEmitter,
     BrowserWindow = require('browser-window'),
     _ = require('underscore-plus');
@@ -47,10 +49,22 @@ var AppWindow = (function (_EventEmitter) {
         };
         windowOpts = _.extend(windowOpts, this.loadSettings);
 
+        /** Init BrowserWindow with provided options **/
         this.window = new BrowserWindow(windowOpts);
 
-        // Attached Markdonw Document to BrowserWindow
-        this.window.mddoc = options.mddoc;
+        /**
+         *  Attached Markdown Buffer Document to BrowserWindow
+         *  If options.bufferdoc exists from openfile add it to currentWindow
+         *  or initialize empty buffer vars
+         * **/
+        if (options.bufferdoc != null) {
+            this.window.bufferdoc = options.bufferdoc;
+        } else {
+            this.window.bufferdoc = {
+                path: '',
+                content: ''
+            };
+        }
 
         this.window.on('closed', (function (_this) {
             return function (e) {
@@ -75,7 +89,6 @@ var AppWindow = (function (_EventEmitter) {
     _createClass(AppWindow, [{
         key: 'show',
         value: function show() {
-            console.log("Show func : " + __dirname);
             //var targetPath = path.resolve(__dirname, '..', '..', 'static', 'index.html');
             var targetPath = path.resolve(__dirname, '..', 'src', 'browser', 'index.html');
             var targetUrl = url.format({

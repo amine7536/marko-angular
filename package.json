@@ -16,7 +16,8 @@
     "gulp-concat": "^2.6.0",
     "gulp-rename": "^1.2.2",
     "gulp-run": "^1.6.10",
-    "gulp-sourcemaps": "^1.5.2"
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-uglify": "^1.4.0"
   },
   "jspm": {
     "directories": {
@@ -44,6 +45,7 @@
     }
   },
   "dependencies": {
+    "cache-require-paths": "^0.1.2",
     "fs-plus": "^2.8.1",
     "gulp": "^3.9.0",
     "nslog": "^2.0.0",
