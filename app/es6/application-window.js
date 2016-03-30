@@ -33,12 +33,16 @@ class AppWindow extends EventEmitter {
             'web-preferences': {
                 'subpixel-font-scaling': true,
                 'direct-write': true
-            }
+            },
+            preload: require.resolve('../renderer/preload')
         };
         windowOpts = _.extend(windowOpts, this.loadSettings);
 
         /** Init BrowserWindow with provided options **/
         this.window = new BrowserWindow(windowOpts);
+
+        // Open the DevTools.
+        // this.window.openDevTools();
 
         /**
          *  Attached Markdown Buffer Document to BrowserWindow

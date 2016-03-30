@@ -34,10 +34,10 @@ class Application extends events.EventEmitter {
             // Todo : Add Darwin stuff
         });
 
-        var ref;
+        /*var ref;
         if ((ref = process.platform) === 'win32' || ref === 'linux') {
             return app.quit();
-        }
+        }*/
 
         //return this.openWithOptions(options);
         this.openWithOptions(options);

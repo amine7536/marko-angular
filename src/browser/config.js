@@ -1,5 +1,5 @@
 System.config({
-    "baseURL": __dirname + "/",
+  "baseURL": __dirname + "/",
   "transpiler": "babel",
   "babelOptions": {
     "optional": [
@@ -17,6 +17,7 @@ System.config({
 System.config({
   "map": {
     "angular": "github:angular/bower-angular@1.4.3",
+    "angular-animate": "bower:angular-animate@1.4.7",
     "angular-route": "github:angular/bower-angular-route@1.4.3",
     "angular-ui-codemirror": "bower:angular-ui-codemirror@0.3.0",
     "angular-ui-layout": "bower:angular-ui-layout@1.0.5",
@@ -33,12 +34,15 @@ System.config({
     "markdown-it-footnote": "bower:markdown-it-footnote@1.0.0",
     "raf": "bower:raf@latest",
     "text": "github:systemjs/plugin-text@0.0.2",
+    "bower:angular-animate@1.4.7": {
+      "angular": "bower:angular@1.4.7"
+    },
     "bower:angular-ui-codemirror@0.3.0": {
-      "angular": "bower:angular@1.4.3",
+      "angular": "bower:angular@1.4.7",
       "codemirror": "bower:codemirror@5.5.0"
     },
     "bower:angular-ui-router@0.2.15": {
-      "angular": "bower:angular@1.4.3"
+      "angular": "bower:angular@1.4.7"
     },
     "bower:codemirror@5.5.0": {
       "css": "github:systemjs/plugin-css@0.1.13"

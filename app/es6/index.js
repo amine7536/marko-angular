@@ -1,5 +1,5 @@
 'use strict';
-require('cache-require-paths');
+//require('cache-require-paths');
 
 let
     Application,

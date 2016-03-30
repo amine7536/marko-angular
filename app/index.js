@@ -1,17 +1,8 @@
-'use strict';
-require('cache-require-paths');
+'use strict'
+//require('cache-require-paths');
 
-var Application = undefined,
-    BrowserWindow = undefined,
-    app = undefined,
-    fs = undefined,
-    nslog = undefined,
-    parseCommandLine = undefined,
-    path = undefined,
-    setupCoffeeScript = undefined,
-    spawn = undefined,
-    start = undefined,
-    url = undefined;
+;
+let Application, BrowserWindow, app, fs, nslog, parseCommandLine, path, setupCoffeeScript, spawn, start, url;
 
 app = require('app');
 url = require('url');
