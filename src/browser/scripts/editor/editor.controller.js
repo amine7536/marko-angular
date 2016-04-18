@@ -1,12 +1,14 @@
 'use strict';
 
 class EditorCtrl {
-    constructor($scope, $window) {
+    constructor($scope, $window, coreService) {
         this.electronVersion = process.versions['electron'];
         console.log(this.electronVersion);
 
+        var browserWindow = coreService.browserWindow;
+
         $scope.editorOptions = {
-            //theme: 'cobalt',
+            theme: 'cobalt',
             gfm: true,
             tables: true,
             breaks: false,
@@ -20,12 +22,17 @@ class EditorCtrl {
             mode: 'markdown'
         };
 
+
         this.codemirrorLoaded = function (_editor) {
             // Editor part
             var _doc = _editor.getDoc();
-            console.log(_doc);
-            console.log($window.innerHeight);
             _editor.focus();
+
+            /** Load Markdown Document if attached to window **/
+            if(browserWindow.bufferdoc.content != '') {
+                _doc.setValue(browserWindow.bufferdoc.content);
+            }
+
 
             /* Handle sizing */
             _editor.setSize('100%', $window.innerHeight);
@@ -71,6 +78,6 @@ class EditorCtrl {
     }
 }
 
-EditorCtrl.$inject = ['$scope','$window'];
+EditorCtrl.$inject = ['$scope','$window', 'coreService'];
 
 export { EditorCtrl };

@@ -1,15 +1,34 @@
 <!DOCTYPE html>
-<html markoApp ng-cloak>
+<html markoApp>
 <head >
-    <title></title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+    <title>&#128025;</title>
+    <link rel="stylesheet" href="assets/stylesheets/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/stylesheets/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="assets/stylesheets/app.css">
+
+    <style>
+        .wrapper {
+            overflow: hidden;
+        }
+        .preload {
+            background-image: url('marko.png');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            width: 1000px;
+            height: 1000px;
+        }
+    </style>
+
 </head>
 <body resize>
 
     <div>
-        <div ng-view></div>
+        <div ng-view>
+            <div class="wrapper">
+                <div class="preload"></div>
+            </div>
+        </div>
     </div>
 
     <script src="jspm_packages/system.js"></script>
